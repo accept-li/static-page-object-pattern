@@ -1,11 +1,11 @@
 # static-page-object-pattern
 Usimg static pages to access any page object from anywhere with state built in at the element level. 
 
-Introduction 
+# Introduction 
 
 The static page object pattern is designed around the concept that all page objects are accessible at any time and all browser interaction such as selenium-webdriver is separated out to the underlying architecture. 
 
-Architecture in brief
+# Architecture in brief
 
 Page.Object.Methods
 
@@ -17,7 +17,7 @@ The methods on the objects are dependent on the DSL of the application and in so
 
 Student.Name.setText(“Jane”)
 
-Page construction 
+# Page construction 
 
 The Pages classes should only be made up of static objects. The pattern is designed to only contain the information required to facility the instruction needed at the element level to identify the object. 
 
@@ -29,7 +29,7 @@ private static TextInput Name =  new TextInput(“#Name”)
 
 The Student class would only contain these static type objects, which forms the basis of the static-page-object-pattern. 
 
-Element construction 
+# Element construction 
 
 The TextInput element described takes a single parameter, in this example this might be a css selector. The construction of an element object must be provided with enough details to  be correctly identified on the page. In the example more information maybe required or further information is required then the Element should be flexible enough to be adaptable. 
 
@@ -39,7 +39,7 @@ new eTextInput(XPATH, “//Name”)
 
 Elements may also be designed around further details required, such as readonly, protected. The pattern is designed, so that at run time the object contains all the methods appropriate for browser interaction. 
 
-Advanced Elements
+# Advanced Elements
 
 Sometimes elements are more complex than simple get and set types, such as tables or bespoke objects designed for a particular application. The pattern should still be followed that any object which requires interaction should be described in the element form. 
 
@@ -53,7 +53,7 @@ Students.StudentTable.Lastname.findRow(“Smith”).click()
 
 Students.StudentTable.Lastname.findRow(“Smith”).row() this function could return the row Id to be used elsewhere. 
 
-Element Types
+# Element Types
 
 The following list highlights the standard types of elements must frequently found on a page. In the sample docs there are examples of the main types. 
 
@@ -72,24 +72,24 @@ The pattern here should be setters are not permitted.
 
 private static TextElement NameField = new TextField(“#name > H1”)
 
-Element Methods
+# Element Methods
 
 The methods, which appear on elements should allow simple getter and setter styles actions. 
 
 In the examples given the basic elements described above have the methods defined. Take for example button or link these should have a simple click(). 
 
-Base Element
+# Base Element
 
 Each element should at least inherit a base class, which contains the majority of the underlying code to interact with the browser. 
 
 There are occasions where inheritance makes sense where elements have similarities.
 
-Browser Interaction & State
+# Browser Interaction & State
 
 I’m calling super from the Element the base class should be aware of the element under action. This also means that interaction or the ready state of the object should take place at this stage. 
 
 Since the pattern is designed around object interaction and not waiting for page ready state then the base class should handle calls such as Ajax. 
 
-Real time passing data to elements 
+# Real time passing data to elements 
 
 Occasions where data is required to be passed into an object such as an iterator should be passed in via a method on the element object. 
